@@ -73,7 +73,8 @@ BOOL DllMain(HINSTANCE instance, DWORD reason, PVOID reserved)
                 MH_CreateHook(CreateProcessW, &$CreateProcessW, (PVOID *)&_CreateProcessW);
                 MH_EnableHook(CreateProcessW);
             }
-            else if (CompareStringOrdinal(Library, -1, description, -1, FALSE) == CSTR_EQUAL)
+            
+            if (CompareStringOrdinal(Library, -1, description, -1, FALSE) == CSTR_EQUAL)
             {
                 MH_CreateHook(RegisterClassExW, &$RegisterClassExW, (PVOID *)&_RegisterClassExW);
                 MH_EnableHook(RegisterClassExW);
