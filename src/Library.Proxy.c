@@ -1,7 +1,6 @@
 #include <windows.h>
 #include <appmodel.h>
 #include <minhook.h>
-#include <stdio.h>
 
 EXTERN_C CONST IMAGE_DOS_HEADER __ImageBase;
 
@@ -52,15 +51,10 @@ BOOL $CreateProcessW(PCWSTR applicationName, PWSTR commandLine, PSECURITY_ATTRIB
     return succeeded;
 }
 
-BOOL DllMain(HINSTANCE instance, DWORD reason, PVOID reserved)
+BOOL DllMainCRTStartup(HINSTANCE instance, DWORD reason, PVOID reserved)
 {
     if (reason == DLL_PROCESS_ATTACH)
     {
-        AllocConsole();
-        freopen("CONIN$", "r", stdin);
-        freopen("CONOUT$", "w", stdout);
-        freopen("CONOUT$", "w", stderr);
-
         PWSTR description = {};
         DisableThreadLibraryCalls(instance);
 

@@ -34,7 +34,7 @@ VOID Resume(HANDLE event, PWSTR path)
 
         SetThreadDescription(thread, Proxy);
         QueueUserAPC((PAPCFUNC)LoadLibraryW, thread, (ULONG_PTR)address);
-        
+
         ResumeThread(thread);
         CloseHandle(thread);
     }
@@ -75,7 +75,7 @@ VOID Launch(HANDLE event, PWSTR path)
     CoUninitialize();
 }
 
-int main()
+VOID WinMainCRTStartup(VOID)
 {
     WCHAR path[MAX_PATH] = {};
     GetModuleFileNameW(NULL, path, MAX_PATH);
@@ -88,5 +88,4 @@ int main()
     }
 
     ExitProcess(0);
-    return 0;
 }
